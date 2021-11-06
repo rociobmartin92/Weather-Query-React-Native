@@ -1,10 +1,16 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Ciudades from "../Vistas/Ciudades/Ciudades";
 
+const Stack = createStackNavigator();
 export default function CiudadesStack() {
   return (
-    <View>
-      <Text> Ciudades </Text>
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ciudades"
+        component={Ciudades}
+        options={{ title: "Lista de Cuidades" }}
+      />
+    </Stack.Navigator>
   );
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import HomeStack from "./HomeStack";
@@ -7,9 +6,8 @@ import CiudadesStack from "./CiudadesStack";
 import CuentaStack from "./CuentaStack";
 import { Icon } from "react-native-elements/dist/icons/Icon";
 
+const Tab = createBottomTabNavigator();
 export default function Navegador() {
-  const Tab = createBottomTabNavigator();
-
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -23,10 +21,10 @@ export default function Navegador() {
                 iconName = "home";
                 break;
               case "ciudades":
-                iconName = "format-list-bulleted";
+                iconName = "city";
                 break;
-              case "micuenta":
-                iconName = "account";
+              case "mi-cuenta":
+                iconName = "account-box";
                 break;
             }
             return (
@@ -50,12 +48,12 @@ export default function Navegador() {
         <Tab.Screen
           name="ciudades"
           component={CiudadesStack}
-          options={{ title: "Lista" }}
+          options={{ title: "Ciudades" }}
         />
         <Tab.Screen
-          name="micuenta"
+          name="mi-cuenta"
           component={CuentaStack}
-          options={{ title: "Mi Cuenta" }}
+          options={{ title: "Cuenta" }}
         />
       </Tab.Navigator>
     </NavigationContainer>
