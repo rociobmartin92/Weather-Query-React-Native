@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import HomeStack from "./HomeStack";
@@ -14,12 +14,32 @@ export default function Navegador() {
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="home"
-        tabBarOptions={{
-          inactiveTintColor: "grey",
-          activeTintColor: "#800000",
-        }}
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ color }) => screenOptions(route, color),
+          tabBarIcon: ({ color }) => {
+            let iconName;
+
+            switch (route.name) {
+              case "home":
+                iconName = "home";
+                break;
+              case "ciudades":
+                iconName = "format-list-bulleted";
+                break;
+              case "micuenta":
+                iconName = "account";
+                break;
+            }
+            return (
+              <Icon
+                type="material-community"
+                name={iconName}
+                size={22}
+                color={color}
+              />
+            );
+          },
+          tabBarActiveTintColor: "#d40000",
+          tabBarInactiveTintColor: "gray",
         })}
       >
         <Tab.Screen
@@ -39,24 +59,5 @@ export default function Navegador() {
         />
       </Tab.Navigator>
     </NavigationContainer>
-  );
-}
-
-function screenOptions(route, color) {
-  let iconName;
-
-  switch (route.name) {
-    case "home":
-      iconName = "home";
-      break;
-    case "ciudades":
-      iconName = "format-list-bulleted";
-      break;
-    case "micuenta":
-      iconName = "account";
-      break;
-  }
-  return (
-    <Icon type="material-community" name={iconName} size={22} color={color} />
   );
 }
