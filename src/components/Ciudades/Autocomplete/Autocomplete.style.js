@@ -1,29 +1,27 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../../../assets/colors';
 
 const styles = StyleSheet.create({
-  textStyle: {
+  inputContainer: {
     fontSize: 16,
-    fontWeight: '800',
-    height: 40,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 10,
-    width: '100%',
+    backgroundColor: '#ffffff',
+    marginTop: -6,
   },
+
   textStyleOptions: {
     fontSize: 16,
     backgroundColor: '#ffffff',
     textTransform: 'capitalize',
   },
   menuOptionStyle: {
-    paddingHorizontal: 28,
-    paddingVertical: 7,
+    paddingHorizontal: 15,
+    paddingVertical: 6,
   },
   cajaDesplegable: {
+    width: '99%',
     alignSelf: 'center',
-    width: '100%',
     maxHeight: 250,
-    borderRadius: 10,
+    borderRadius: 5,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     shadowColor: '#000',
@@ -33,19 +31,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-    elevation: 3,
-    backgroundColor: '#ffffff',
-  },
-  arrowStyle: {
-    position: 'absolute',
-    right: 0,
-    alignItems: 'flex-end',
-    paddingTop: 22,
-    marginLeft: 9,
-    paddingRight: 15,
-  },
-  triangle: {
-    fontSize: 35,
+    elevation: 2,
   },
 });
 export default styles;

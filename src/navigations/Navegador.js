@@ -28,7 +28,7 @@ export default function Navegador() {
               case 'home':
                 iconName = 'home';
                 break;
-              case 'ciudades':
+              case 'listaCiudades':
                 iconName = 'city';
                 break;
               case 'miCuenta':
@@ -48,11 +48,9 @@ export default function Navegador() {
           tabBarInactiveTintColor: colors.LIGHTGREY,
           headerShown: false,
           background: colors.GENERAL,
+          tabBarActiveBackgroundColor: colors.LIGHTGREY,
+          tabBarInactiveBackgroundColor: colors.GENERAL,
         })}
-        tabBarOptions={{
-          activeBackgroundColor: colors.LIGHTGREY,
-          inactiveBackgroundColor: colors.GENERAL,
-        }}
       >
         <Tab.Screen
           name="home"
@@ -60,7 +58,7 @@ export default function Navegador() {
           options={{ title: 'Home' }}
         />
         <Tab.Screen
-          name="ciudades"
+          name="listaCiudades"
           component={CiudadesStack}
           options={{ title: 'Ciudades' }}
         />

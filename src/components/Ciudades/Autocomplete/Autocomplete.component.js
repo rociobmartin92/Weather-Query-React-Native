@@ -1,82 +1,67 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Platform, TextInput, Pressable } from 'react-native';
-import { Input, Icon, Button } from 'react-native-elements';
+import { View, Text } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { IconButton, TextInput } from 'react-native-paper';
+import CardCiudad from '../CardCiudad/CardCiudad.component';
+import Modal from '../../Modal/Modal.component';
+import colors from '../../../../assets/colors';
 import styles from './Autocomplete.style';
+import { capitalizeFirstLetter } from '../../../utils/capitalize';
 
 function Autocomplete(props) {
-  const {
-    label,
-    // valueSeleccionado,
-    data,
-    // valueDefault = undefined,
-  } = props;
-
-  const [valueSelected, setValueSelected] = useState('');
+  const { data, label, valueSelected } = props;
+  const [valueInput, setValueInput] = useState('');
   const [valueFilter, setValueFilter] = useState(data);
-
+  const [placeSelected, setPlaceSelected] = useState(null);
+  const [valueShow, setValueShow] = useState('');
   const [isOpen, setOpen] = React.useState(true);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
 
   const onPressItemHandler = (itemValue) => {
-    // valueSeleccionado(itemValue);
+    valueSelected(itemValue);
+    setPlaceSelected(itemValue);
+    setValueShow(
+      capitalizeFirstLetter(itemValue.nombre) +
+        ', ' +
+        capitalizeFirstLetter(itemValue.provincia_nombre)
+    );
     setOpen(false);
   };
 
-  const setDefault = () => {
-    // valueSeleccionado(valueDefault);
-  };
-
-  //   useEffect(() => console.log('Data2', data), []);
-
   const changeValue = (value) => {
-    setValueSelected(value);
-    if (valueSelected === '') {
+    valueSelected(undefined);
+    setPlaceSelected(null);
+    setValueShow(value);
+    setValueInput(capitalizeFirstLetter(value));
+    if (valueInput === '') {
       setValueFilter(data);
       setOpen(false);
     } else {
       setOpen(true);
     }
-    // if (localidadSelect.length > 0) {
-    //   localidadSelect.map((loc) => {
-    //     return setValueFilter({
-    //       ...valueFilter,
-    //       nombre: loc.nombre,
-    //       latitud: loc.centroide_lat,
-    //       longitud: loc.centroide_lon,
-    //       provincia: loc.provincia_nombre,
-    //     });
-    //   });
-    // } else {
-    //   setValueFilter({
-    //     nombre: '',
-    //     latitud: '',
-    //     longitud: '',
-    //     provincia: '',
-    //   });
-    // }
   };
 
   const filter = () => {
     let localidadSelect = data.filter(
       (item) =>
-        item.nombre.toLowerCase() === valueSelected.toLowerCase() ||
-        item.provincia_nombre.toLowerCase() === valueSelected.toLowerCase() ||
+        item.nombre.toLowerCase() === valueInput.toLowerCase() ||
+        item.provincia_nombre.toLowerCase() === valueInput.toLowerCase() ||
         item.provincia_nombre.toLowerCase() +
           ' ' +
           item.nombre.toLowerCase() ===
-          valueSelected.toLowerCase() ||
+          valueInput.toLowerCase() ||
         item.nombre.toLowerCase() +
           ' ' +
           item.provincia_nombre.toLowerCase() ===
-          valueSelected.toLowerCase() ||
+          valueInput.toLowerCase() ||
         item.provincia_nombre.toLowerCase() +
           ', ' +
           item.nombre.toLowerCase() ===
-          valueSelected.toLowerCase() ||
+          valueInput.toLowerCase() ||
         item.nombre.toLowerCase() +
           ', ' +
           item.provincia_nombre.toLowerCase() ===
-          valueSelected.toLowerCase()
+          valueInput.toLowerCase()
     );
     localidadSelect === [] ? setOpen(false) : setOpen(true);
     return localidadSelect;
@@ -86,56 +71,61 @@ function Autocomplete(props) {
     if (data !== false) {
       setValueFilter(filter());
     }
-  }, [valueSelected]);
+  }, [valueInput]);
 
   return (
     <>
-      <Pressable
-        key={`combobox-${label}`}
-        onPress={() => {
-          setOpen(!isOpen);
+      <TextInput
+        theme={{
+          colors: {
+            primary: colors.GENERAL,
+          },
         }}
-      >
-        <TextInput
-          onChangeText={changeValue}
-          value={valueSelected}
-          style={styles.textStyle}
-          placeholder="Localidad"
-
-          // right={
-          //   <TextInput.Icon
-          //     name={() => (
-          //       <FontAwesome
-          //         name={isOpen ? 'angle-up' : 'angle-down'}
-          //         size={20}
-          //         style={styles.triangle}
-          //       />
-          //     )}
-          //   />
-          // }
-        />
-      </Pressable>
+        onChangeText={changeValue}
+        value={valueShow}
+        defaultValue={valueInput}
+        label={label}
+        style={styles.inputContainer}
+        mode="outlined"
+        right={
+          valueInput !== '' ? (
+            <TextInput.Icon
+              name={() => (
+                <IconButton
+                  icon="close-circle-outline"
+                  color={colors.GENERAL}
+                  size={20}
+                  onPress={() => {
+                    setValueInput(''), setPlaceSelected(''), setValueShow('');
+                  }}
+                />
+              )}
+            />
+          ) : null
+        }
+      />
 
       {isOpen ? (
-        <View>
-          <View style={styles.cajaDesplegable}>
-            <ScrollView>
-              {valueFilter.slice(0, 50).map((item, key) => (
-                <TouchableOpacity
-                  onPress={() => {
-                    onPressItemHandler(item.nombre);
-                  }}
-                  key={`item-${key}`}
-                  style={styles.menuOptionStyle}
-                >
-                  <Text
-                    style={styles.textStyleOptions}
+        <View style={styles.cajaDesplegable}>
+          <ScrollView>
+            {valueFilter
+              ? valueFilter.slice(0, 50).map((item, key) => (
+                  <TouchableOpacity
+                    onPress={() => {
+                      onPressItemHandler(item);
+                      setIsVisibleModal(true);
+                    }}
                     key={`item-${key}`}
-                  >{`${item.nombre}, ${item.provincia_nombre} `}</Text>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </View>
+                    style={styles.menuOptionStyle}
+                  >
+                    <Text
+                      style={styles.textStyleOptions}
+                      key={`item-${key}`}
+                    >{`${item.nombre}, ${item.provincia_nombre} `}</Text>
+                  </TouchableOpacity>
+                ))
+              : null}
+          </ScrollView>
         </View>
       ) : null}
     </>

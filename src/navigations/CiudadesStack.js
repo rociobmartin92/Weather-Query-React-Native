@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Ciudades from '../screens/Ciudades/Ciudades.screen';
+import MiCiudad from '../screens/Ciudades/MiCiudad/MiCiudad.screen';
 import colors from '../../assets/colors';
 
 const Stack = createStackNavigator();
@@ -17,7 +18,13 @@ export default function CiudadesStack() {
       <Stack.Screen
         name="ciudades"
         component={Ciudades}
-        options={{ title: 'Lista de Cuidades' }}
+        options={{ title: 'Mis Ciudades' }}
+      />
+
+      <Stack.Screen
+        name="miCiudad"
+        component={MiCiudad}
+        options={{ title: 'Mi ciudad' }}
       />
     </Stack.Navigator>
   );
