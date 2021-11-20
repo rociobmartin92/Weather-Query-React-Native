@@ -1,11 +1,11 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import HomeStack from './HomeStack';
-import CiudadesStack from './CiudadesStack';
-import CuentaStack from './CuentaStack';
-import colors from '../../assets/colors';
-import { Icon } from 'react-native-elements/dist/icons/Icon';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import HomeStack from "./HomeStack";
+import CiudadesStack from "./CiudadesStack";
+import CuentaStack from "./CuentaStack";
+import colors from "../../assets/colors";
+import { Icon } from "react-native-elements/dist/icons/Icon";
 
 const Tab = createBottomTabNavigator();
 export default function Navegador() {
@@ -13,7 +13,7 @@ export default function Navegador() {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: '#FFF',
+      background: "#FFF",
     },
   };
   return (
@@ -25,14 +25,14 @@ export default function Navegador() {
             let iconName;
 
             switch (route.name) {
-              case 'home':
-                iconName = 'home';
+              case "home":
+                iconName = "home";
                 break;
-              case 'listaCiudades':
-                iconName = 'city';
+              case "listaCiudades":
+                iconName = "city";
                 break;
-              case 'miCuenta':
-                iconName = 'account-circle';
+              case "miCuenta":
+                iconName = "account-circle";
                 break;
             }
             return (
@@ -55,17 +55,17 @@ export default function Navegador() {
         <Tab.Screen
           name="home"
           component={HomeStack}
-          options={{ title: 'Home' }}
+          options={({ title: "Home" })}
         />
         <Tab.Screen
           name="listaCiudades"
           component={CiudadesStack}
-          options={{ title: 'Ciudades' }}
+          options={{ title: "Ciudades" }}
         />
         <Tab.Screen
           name="miCuenta"
           component={CuentaStack}
-          options={{ title: 'Cuenta' }}
+          options={{ title: "Cuenta" }}
         />
       </Tab.Navigator>
     </NavigationContainer>
