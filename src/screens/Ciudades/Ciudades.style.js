@@ -26,12 +26,12 @@ export const styles = StyleSheet.create({
   },
   btnInfo: { backgroundColor: colors.LIGHTGREY, width: '100%', height: '100%' },
   containerBtnInfo: {
-    marginBottom: 15,
+    marginBottom: 0,
     width: 120,
     height: 50,
     position: 'absolute',
     bottom: 5,
-    right: 5,
+    right: 0,
   },
   btnDelete: {
     backgroundColor: colors.LIGHTGREY,
@@ -80,5 +80,35 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: Dimensions.get('window').height - 210,
     marginTop: 10,
+  },
+  card_info: {
+    position: "absolute",
+    top: 15,
+    left: 50,
+  },
+  card_info_desc: {
+    fontSize: 14,
+    textTransform: "uppercase",
+  },
+  card_info_temp: {
+    position: "absolute",
+    top: 20,
+    left: 135
+  },
+  temperatura: {
+    fontSize: 40,
+  },
+  grado: {
+    fontSize: 20,
+    color: "grey"
+  },
+  card_info_location: {
+    textTransform: "uppercase",
+    paddingLeft: 10,
+  },
+  card_info_extra: {
+    position: "absolute",
+    bottom: 15,
+    left: 18,
   },
 });

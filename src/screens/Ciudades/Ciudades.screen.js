@@ -77,12 +77,36 @@ export default function Ciudades(props) {
     setInfoCiudad(array);
   };
 
+  const kelvin = 273.15;
+
   function CardInfo() {
     if (infoCiudad.length > 0) {
       return infoCiudad.map((item, index) => {
         return (
           <View style={styles.card} key={index}>
-            <Text>{item.current.condition.text}</Text>
+            <View style={styles.card_info}>
+              <Text style={styles.temperatura}>{ parseInt(item.main.temp-kelvin) }
+                <Text style={styles.grado}>&#x2103;</Text>
+                <Image
+                  style={{width: 66, height: 58}}
+                  source={{ uri: `http://openweathermap.org/img/w/${item.weather[0].icon}.png` }}
+                />
+              </Text>
+              <Text style={styles.card_info_desc}>{item.weather[0].description}</Text>
+              <View style={styles.card_info_temp}>
+                <Text>Mín. { parseInt(item.main.temp_min-kelvin) } <Text>&#x2103;</Text></Text>
+                <Text>Máx. { parseInt(item.main.temp_max-kelvin) } <Text>&#x2103;</Text></Text>
+                <Text>ST. { parseInt(item.main.feels_like-kelvin) } <Text>&#x2103;</Text></Text>
+              </View>
+            </View>
+            <Text style={styles.card_info_location}>Ubicación: <Text>{item.name}</Text></Text>
+            <View style={styles.card_info_extra}>
+              <Text>
+                <Text>H: {item.main.humidity}% </Text>
+                <Text>PA: {item.main.pressure}hPA </Text>
+                <Text>V: {parseInt(item.wind.speed*3.6)}km/h </Text>
+              </Text>
+            </View>
             <Button
               icon={{
                 name: 'delete',
