@@ -58,9 +58,9 @@ export default function Home() {
 
 const estilos = StyleSheet.create({
   imagen: {
-    width: 250,
-    height: 220,
-    marginTop: 30,
+    width: 200,
+    height: 180,
+    marginTop: 10,
   },
   contenedor: { alignItems: "center" },
   text: {
@@ -68,7 +68,7 @@ const estilos = StyleSheet.create({
     textAlign: "center",
     marginLeft: 30,
     marginRight: 40,
-    marginTop: 30,
+    marginTop: 10,
     fontFamily: "serif",
   },
   text2: {
@@ -82,10 +82,10 @@ const estilos = StyleSheet.create({
   cntxt: { alignItems: "center" },
   qs: {
     color: "#CC0000",
-    marginTop: 185,
+    marginTop: 125,
     marginLeft: 225,
     fontFamily: "sans-serif-condensed",
-    fontSize: 17,
+    fontSize: 18,
     marginBottom: 8,
   },
   lluvia: { width: 412, height: 820 },
