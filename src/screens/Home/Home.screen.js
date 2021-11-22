@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Animated, Image } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { useState, useEffect } from "react";
+import wea from "../../../assets/wea.png";
 
 export default function Home() {
   const navegacion = useNavigation();
@@ -11,14 +12,14 @@ export default function Home() {
   useEffect(() => {
     Animated.timing(lluvia, {
       toValue: 0,
-      duration: 4000,
+      duration: 7000,
       useNativeDriver: false,
     }).start(() => setCerrar(false));
   }, []);
 
   if (cerrar) {
     return (
-      <View>
+      <View style={estilos.contenedor}>
         <Animated.Image
           style={[estilos.lluvia, { opacity: lluvia }]}
           source={{
@@ -30,14 +31,7 @@ export default function Home() {
   } else
     return (
       <View style={estilos.contenedor}>
-        <Text style={estilos.tit}> Weather Query App</Text>
-
-        <Image
-          style={estilos.imagen}
-          source={{
-            uri: "http://getdrawings.com/cliparts/weather-clipart-for-kids-19.jpg",
-          }}
-        />
+        <Image style={estilos.imagen} source={wea} />
 
         <View style={estilos.cntxt}>
           <Text style={estilos.text}>
@@ -63,14 +57,18 @@ export default function Home() {
 }
 
 const estilos = StyleSheet.create({
-  imagen: { width: 210, height: 130, marginBottom: 60 },
+  imagen: {
+    width: 250,
+    height: 220,
+    marginTop: 30,
+  },
   contenedor: { alignItems: "center" },
-  tit: { fontSize: 32, margin: 20, marginTop: 55 },
   text: {
     fontSize: 18,
     textAlign: "center",
     marginLeft: 30,
     marginRight: 40,
+    marginTop: 30,
     fontFamily: "serif",
   },
   text2: {
@@ -83,12 +81,16 @@ const estilos = StyleSheet.create({
   },
   cntxt: { alignItems: "center" },
   qs: {
-    color: "#B8860B",
-    marginTop: 160,
-    marginLeft: 210,
-    fontFamily: "serif",
-    fontSize: 15,
+    color: "#CC0000",
+    marginTop: 185,
+    marginLeft: 225,
+    fontFamily: "sans-serif-condensed",
+    fontSize: 17,
+    marginBottom: 8,
   },
-
-  lluvia: { width: 412, height: 773 },
+  lluvia: { width: 412, height: 820 },
+  contenedor: {
+    flex: 1,
+    alignItems: "center",
+  },
 });
