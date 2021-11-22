@@ -1,16 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { Text, StyleSheet, ScrollView } from "react-native";
 import { ListItem, Avatar } from "react-native-elements";
 
 export default function QuienesSomos() {
   return (
-    <View>
+    <ScrollView>
       <Text style={estilos.text}>
         Esta aplicación fue creada como proyecto final para el curso de
         Especialización en desarrollo mobile de IBM Skills y Codo a Codo.
       </Text>
       <Text style={estilos.sub}> Somos un grupo de 5 programadores:</Text>
-
       {list.map((el, index) => (
         <ListItem key={index} style={estilos.cnt}>
           <Avatar rounded source={{ uri: el.foto }} style={estilos.foto} />
@@ -22,7 +21,22 @@ export default function QuienesSomos() {
           </ListItem.Content>
         </ListItem>
       ))}
-    </View>
+      <Text style={estilos.text}>
+        Para crear la aplicación en un principio dibujamos en papel un bosquejo
+        del diseño que queríamos, y definimos las funciones que la apliación
+        debía tener, luego realizamos ese diseño en Figma.
+      </Text>
+      <Text> ACA VA A IR EL LINK A FIGMA</Text>
+      <Text style={estilos.text}>
+        Una vez terminado, creamos un repositorio y agregamos a los integrantes.
+        De la rama principal, master, generamos dos branches, una para la
+        sección de "Home" y otra para la sección de "Ciudades" y trabajamos por
+        separado en ellas, luego mergeamos ambas branches al master. Utilizamos
+        Git y Github como herramientas de control de versiones y Discord para
+        realizar las reuniones entre nosotros. Además diseñamos un logo con la
+        herramienta Canva.
+      </Text>
+    </ScrollView>
   );
 }
 

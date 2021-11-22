@@ -49,7 +49,7 @@ export default function Home() {
               navegacion.navigate("qs");
             }}
           >
-            Sobre Nosotros
+            Quienes Somos
           </Text>
         </View>
       </View>
@@ -81,8 +81,7 @@ const estilos = StyleSheet.create({
   },
   cntxt: { alignItems: "center" },
   qs: {
-    color: "#CC0000",
-    marginTop: 125,
+    marginTop: 185,
     marginLeft: 225,
     fontFamily: "sans-serif-condensed",
     fontSize: 18,
