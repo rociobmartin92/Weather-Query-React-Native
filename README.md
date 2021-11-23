@@ -7,7 +7,7 @@ Se trata de una App en la que puedes buscar ciudades de cualquier parte de Argen
 - Utilizamos Git y Github como herramientas de control de versiones y Discord para realizar las reuniones entre nosotros. 
 - Diseñamos un logo con la herramienta de diseño Canva. 
 - En la parte de Front End trabajamos unicamente con la librería React Native ejecutada con Expo CLI. 
-- Como herramientas de BackEnd y persistencia de datos usamos Firebase y SQLite.
+- Como herramientas de Back End y persistencia de datos usamos Firebase y SQLite.
 - Fuente de datos para la consulta del clima y búsqueda de ciudades: "API Weather".
 - Modelo Personas Canvas:
 - Paper Prototype:
