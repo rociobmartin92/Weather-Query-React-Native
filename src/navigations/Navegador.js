@@ -1,13 +1,15 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import HomeStack from "./HomeStack";
-import CiudadesStack from "./CiudadesStack";
-import CuentaStack from "./CuentaStack";
-import colors from "../../assets/colors";
-import { Icon } from "react-native-elements/dist/icons/Icon";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Tab = createBottomTabNavigator();
+import Home from '../screens/Home/Home.screen';
+import QuienesSomos from "../screens/Home/QuienesSomos";
+import Ciudades from "../screens/Ciudades/Ciudades.screen";
+import MiCiudad from "../screens/Ciudades/MiCiudad/MiCiudad.screen"
+import colors from "../../assets/colors"
+
+const Stack = createNativeStackNavigator();
+
 export default function Navegador() {
   const MyTheme = {
     ...DefaultTheme,
@@ -18,56 +20,36 @@ export default function Navegador() {
   };
   return (
     <NavigationContainer theme={MyTheme}>
-      <Tab.Navigator
+      <Stack.Navigator
         initialRouteName="home"
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ color }) => {
-            let iconName;
-
-            switch (route.name) {
-              case "home":
-                iconName = "home";
-                break;
-              case "listaCiudades":
-                iconName = "city";
-                break;
-              case "miCuenta":
-                iconName = "account-circle";
-                break;
-            }
-            return (
-              <Icon
-                type="material-community"
-                name={iconName}
-                size={22}
-                color={color}
-              />
-            );
-          },
-          tabBarActiveTintColor: colors.GENERAL,
-          tabBarInactiveTintColor: colors.LIGHTGREY,
-          headerShown: false,
-          background: colors.GENERAL,
-          tabBarActiveBackgroundColor: colors.LIGHTGREY,
-          tabBarInactiveBackgroundColor: colors.GENERAL,
-        })}
+        screenOptions={{
+          headerStyle: { backgroundColor: colors.GENERAL },
+          headerTintColor: colors.LIGHTGREY,
+          headerTitleAlign: 'center',
+          headerTitleStyle: { fontSize: 18 },
+        }}
       >
-        <Tab.Screen
-          name="home"
-          component={HomeStack}
-          options={({ title: "Home" })}
+        <Stack.Screen 
+          name="home" 
+          component={Home}
+          options={{title: "Home"}}
+          />
+        <Stack.Screen 
+          name="qs"
+          component={QuienesSomos}
+          options={{title: "Sobre Nosotros"}}
         />
-        <Tab.Screen
+        <Stack.Screen 
           name="listaCiudades"
-          component={CiudadesStack}
-          options={{ title: "Ciudades" }}
+          component={Ciudades}
+          options={{title: "Mis Ciudades"}}
         />
-        <Tab.Screen
-          name="miCuenta"
-          component={CuentaStack}
-          options={{ title: "Cuenta" }}
+        <Stack.Screen 
+          name="miCiudad"
+          component={MiCiudad}
+          options={{title: "Mi Ciudad"}}
         />
-      </Tab.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

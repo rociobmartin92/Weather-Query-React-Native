@@ -32,13 +32,6 @@ export const styles = StyleSheet.create({
     color: colors.LIGHTGREY,
     textAlignVertical: 'center',
   },
-  btnFAB: {
-    position: 'absolute',
-    margin: 16,
-    bottom: 55,
-    alignSelf: 'center',
-    backgroundColor: colors.LIGHTGREY,
-  },
   cardContainer: {
     width: '100%',
   },

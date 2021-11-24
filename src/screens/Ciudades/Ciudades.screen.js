@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { Button } from 'react-native-elements';
-import { Snackbar, FAB } from 'react-native-paper';
+import { Button, FAB } from 'react-native-elements';
+import { Snackbar } from 'react-native-paper';
 import Toast from 'react-native-root-toast';
 import localidadesAPI from '../../services/localidadesAPI.service';
 import weatherAPI from '../../services/weatherAPI.service';
@@ -113,12 +113,14 @@ export default function Ciudades() {
         La ciudad se agregó correctamente
       </Snackbar>
       <FAB
-        icon={isOnMap ? 'view-list-outline' : 'map-legend'}
-        style={styles.btnFAB}
-        color={colors.GENERAL}
-        label={isOnMap ? 'VER LISTA' : 'VER MAPA'}
-        onPress={() => setIsOnMap(!isOnMap)}
         visible={cities.length === 0 ? false : true}
+        onPress={() => setIsOnMap(!isOnMap)}
+        icon={{
+          name: isOnMap ? 'apartment' : 'map',
+          color: 'white'
+        }}
+        color={colors.GENERAL}
+        placement="left"
       />
     </>
   );
