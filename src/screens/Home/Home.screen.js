@@ -1,8 +1,10 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Animated, Image } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import { useState, useEffect } from "react";
-import wea from "../../../assets/wea.png";
+import { FAB } from "react-native-elements";
+
+import colors from '../../../assets/colors';
 
 export default function Home() {
   const navegacion = useNavigation();
@@ -12,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     Animated.timing(lluvia, {
       toValue: 0,
-      duration: 7000,
+      duration: 1000,
       useNativeDriver: false,
     }).start(() => setCerrar(false));
   }, []);
@@ -22,27 +24,33 @@ export default function Home() {
       <View style={estilos.contenedor}>
         <Animated.Image
           style={[estilos.lluvia, { opacity: lluvia }]}
-          source={{
-            uri: "https://www.okchicas.com/wp-content/uploads/2019/05/Wallpapers-de-naturaleza-13.jpg",
-          }}
+          source={require("../../../assets/home-wallpaper.webp")}
         />
       </View>
     );
   } else
     return (
       <View style={estilos.contenedor}>
-        <Image style={estilos.imagen} source={wea} />
+        <Image style={estilos.logo} source={require("../../../assets/logo.png")} />
 
-        <View style={estilos.cntxt}>
           <Text style={estilos.text}>
             Consulta rapidamente el clima de cualquier lugar de Argentina en
             tiempo real y escoge la mejor ciudad para vender tus productos hoy
           </Text>
 
-          <Text style={estilos.text2}>
+          <Text style={estilos.text}>
             Weather Query App te permite registrar tu usuario y guardar las
             ciudades que más habitúas
           </Text>
+
+          <FAB
+            onPress={() => navegacion.navigate('listaCiudades')}
+            title="Mis Ciudades"
+            icon={{ name: 'apartment', color: 'white' }}
+            color={colors.GENERAL}
+            style={estilos.fab}
+          />
+
           <Text
             style={estilos.qs}
             onPress={() => {
@@ -51,18 +59,20 @@ export default function Home() {
           >
             Quienes Somos
           </Text>
-        </View>
       </View>
     );
 }
 
 const estilos = StyleSheet.create({
-  imagen: {
+  contenedor: { 
+    flex: 1,
+    alignItems: "center",
+  },
+  logo: {
     width: 200,
     height: 180,
     marginTop: 10,
   },
-  contenedor: { alignItems: "center" },
   text: {
     fontSize: 18,
     textAlign: "center",
@@ -71,25 +81,18 @@ const estilos = StyleSheet.create({
     marginTop: 10,
     fontFamily: "serif",
   },
-  text2: {
-    fontSize: 18,
-    textAlign: "center",
-    marginLeft: 30,
-    marginRight: 40,
-    marginTop: 10,
-    fontFamily: "serif",
-  },
-  cntxt: { alignItems: "center" },
   qs: {
-    marginTop: 185,
-    marginLeft: 225,
+    position: "absolute",
+    right: 30,
+    bottom: 30,
     fontFamily: "sans-serif-condensed",
-    fontSize: 18,
-    marginBottom: 8,
+    fontSize: 18
   },
-  lluvia: { width: 412, height: 820 },
-  contenedor: {
-    flex: 1,
-    alignItems: "center",
+  lluvia: { 
+    width: 412, 
+    height: 820 
   },
+  fab: {
+    marginTop: 40
+  }
 });
