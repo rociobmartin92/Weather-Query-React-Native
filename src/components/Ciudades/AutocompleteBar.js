@@ -3,7 +3,6 @@ import { StyleSheet, View } from "react-native";
 import { Button } from 'react-native-elements';
 import Toast from 'react-native-root-toast';
 
-import weatherAPI from '../../services/weatherAPI.service';
 import localidadesAPI from '../../services/localidadesAPI.service';
 import Autocomplete from '../../components/Ciudades/Autocomplete/Autocomplete.component';
 import * as database from "../../utils/databaseController";
@@ -30,14 +29,20 @@ export default function AutocompleteBar(props){
 
     setLoadingBtnAdd(true);
 
-    weatherAPI(valueSelected.centroide_lat, valueSelected.centroide_lon)
-    .then((city) => { 
-      database.add(JSON.stringify(city), setCities);
-      database.read(setCities);
+    let city = {
+      provincia: valueSelected.provincia_nombre,
+      name: valueSelected.nombre,
+      coord: {
+        lat: valueSelected.centroide_lat,
+        lon: valueSelected.centroide_lon
+      }
+    }
 
-      setLoadingBtnAdd(false);
-      setShowSnackbar(true);
-    })
+    database.add(JSON.stringify(city), setCities);
+    database.read(setCities);
+
+    setLoadingBtnAdd(false);
+    setShowSnackbar(true);
   };
 
   return (
