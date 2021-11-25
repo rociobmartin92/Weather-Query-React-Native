@@ -41,5 +41,6 @@ export const styles = StyleSheet.create({
   },
   cardContainer: {
     width: '100%',
+    marginVertical: 10,
   },
 });

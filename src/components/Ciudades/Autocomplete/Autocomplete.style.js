@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   cajaDesplegable: {
+    zIndex: 999,
+    backgroundColor: '#ffffff',
+    position: 'absolute',
+    top: 59,
     width: '99%',
     alignSelf: 'center',
     maxHeight: 250,

@@ -11,12 +11,12 @@ import colors from '../../../assets/colors';
 import { styles } from './Ciudades.style';
 import InfoCard from '../../components/Ciudades/InfoCard';
 import Mapa from '../../components/Ciudades/Mapa';
-import * as database from "../../utils/databaseController";
+import * as database from '../../utils/databaseController';
 
 export default function Ciudades() {
   const [listadoLocalidades, setListadoLocalidades] = useState(false);
   const [valueSelected, setValueSelected] = useState(null);
-  
+
   const [show, setShow] = useState(false);
   const [loadingBtnAdd, setLoadingBtnAdd] = useState(false);
   const [isOnMap, setIsOnMap] = useState(false);
@@ -40,14 +40,15 @@ export default function Ciudades() {
 
     setLoadingBtnAdd(true);
 
-    weatherAPI(valueSelected.centroide_lat, valueSelected.centroide_lon)
-    .then((city) => { 
-      database.add(JSON.stringify(city), setCities);
-      database.read(setCities);
+    weatherAPI(valueSelected.centroide_lat, valueSelected.centroide_lon).then(
+      (city) => {
+        database.add(JSON.stringify(city), setCities);
+        database.read(setCities);
 
-      setLoadingBtnAdd(false);
-      setShow(true);
-    })
+        setLoadingBtnAdd(false);
+        setShow(true);
+      }
+    );
   };
 
   const eliminarCiudad = (id) => {
@@ -67,41 +68,53 @@ export default function Ciudades() {
     }
 
     return (
-      <ScrollView style={styles.cardContainer}>
-        {cities.map((city) => (
-          <InfoCard city={city} eliminarCiudad={eliminarCiudad} key={city.key}/>
-        ))}
-      </ScrollView>
+      <View>
+        <ScrollView
+          style={styles.cardContainer}
+          showsVerticalScrollIndicator={false}
+        >
+          {cities.map((city) => (
+            <InfoCard
+              city={city}
+              eliminarCiudad={eliminarCiudad}
+              key={city.key}
+            />
+          ))}
+        </ScrollView>
+      </View>
     );
   }
 
   return (
     <>
-      { isOnMap ? <Mapa cities={cities} /> :
-      <View style={{ paddingHorizontal: 10 }}>
-        <View style={styles.inputContainer}>
-          <View style={{ flex: 1, marginRight: 10 }}>
-            <Autocomplete
-              label="Agregar ciudad"
-              data={listadoLocalidades}
-              valueSelected={setValueSelected}
-            />
+      {isOnMap ? (
+        <Mapa cities={cities} />
+      ) : (
+        <View style={{ paddingHorizontal: 10 }}>
+          <View style={styles.inputContainer}>
+            <View style={{ flex: 1, marginRight: 10 }}>
+              <Autocomplete
+                label="Agregar ciudad"
+                data={listadoLocalidades}
+                valueSelected={setValueSelected}
+              />
+            </View>
+            <View>
+              <Button
+                icon={{
+                  name: 'plus-box',
+                  color: colors.LIGHTGREY,
+                  type: 'material-community',
+                }}
+                buttonStyle={styles.btnAdd}
+                onPress={agregarCiudad}
+                loading={loadingBtnAdd}
+              />
+            </View>
           </View>
-          <View>
-            <Button
-              icon={{
-                name: 'plus-box',
-                color: colors.LIGHTGREY,
-                type: 'material-community',
-              }}
-              buttonStyle={styles.btnAdd}
-              onPress={agregarCiudad}
-              loading={loadingBtnAdd}
-            />
-          </View>
+          <CardsInfo />
         </View>
-        <CardsInfo />
-      </View>}
+      )}
       <Snackbar
         theme={{ colors: { surface: colors.LIGHTGREY } }}
         visible={show}
