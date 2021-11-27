@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { IconButton, TextInput } from 'react-native-paper';
-import CardCiudad from '../CardCiudad/CardCiudad.component';
-import Modal from '../../Modal/Modal.component';
 import colors from '../../../../assets/colors';
 import styles from './Autocomplete.style';
 import { capitalizeFirstLetter } from '../../../utils/capitalize';
@@ -15,7 +13,6 @@ function Autocomplete(props) {
   const [placeSelected, setPlaceSelected] = useState(null);
   const [valueShow, setValueShow] = useState('');
   const [isOpen, setOpen] = React.useState(true);
-  const [isVisibleModal, setIsVisibleModal] = useState(false);
 
   const onPressItemHandler = (itemValue) => {
     valueSelected(itemValue);
@@ -113,7 +110,6 @@ function Autocomplete(props) {
                   <TouchableOpacity
                     onPress={() => {
                       onPressItemHandler(item);
-                      setIsVisibleModal(true);
                     }}
                     key={`item-${key}`}
                     style={styles.menuOptionStyle}
