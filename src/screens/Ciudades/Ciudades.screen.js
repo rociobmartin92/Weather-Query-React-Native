@@ -11,10 +11,10 @@ import ModalWeather from '../../components/Ciudades/ModalWeather';
 import * as database from '../../utils/databaseController';
 
 export default function Ciudades() {
-  const [showSnackbarAdd, setShowSnackbarAdd] = useState(false);
-  const [showSnackbarDelete, setShowSnackbarDelete] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState('');
 
   const [isOnMap, setIsOnMap] = useState(false);
+  const [centerMapOnCity, setCenterMapOnCity] = useState(false);
   const [cities, setCities] = useState([]);
 
   const [modalCity, setModalCity] = useState({});
@@ -28,52 +28,46 @@ export default function Ciudades() {
   return (
     <>
       {isOnMap ? (
-        <Mapa cities={cities} />
+        <Mapa cities={cities} modalCity={modalCity} centerMapOnCity={centerMapOnCity} />
       ) : (
         <View style={{ paddingHorizontal: 10 }}>
           <AutocompleteBar
-            setShowSnackbarAdd={setShowSnackbarAdd}
             cities={cities}
             setCities={setCities}
+            setSnackbarMsg={setSnackbarMsg}
           />
           <InfoCardList
             cities={cities}
             setCities={setCities}
+            setSnackbarMsg={setSnackbarMsg}
             setModalVisible={setModalVisible}
             setModalCity={setModalCity}
-            setShowSnackbarDelete={setShowSnackbarDelete}
           />
           <ModalWeather
             modalCity={modalCity}
-            setModalVisible={setModalVisible}
             modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
             setIsOnMap={setIsOnMap}
+            setCenterMapOnCity={setCenterMapOnCity}
           />
         </View>
       )}
       <Snackbar
         theme={{ colors: { surface: colors.LIGHTGREY } }}
-        visible={showSnackbarAdd}
+        visible={snackbarMsg}
         wrapperStyle={styles.positionWrapper}
         style={styles.snackBar}
-        onDismiss={() => setShowSnackbarAdd(false)}
+        onDismiss={() => setSnackbarMsg('')}
         duration={1000}
       >
-        La ciudad se agregó correctamente
-      </Snackbar>
-      <Snackbar
-        theme={{ colors: { surface: colors.LIGHTGREY } }}
-        visible={showSnackbarDelete}
-        wrapperStyle={styles.positionWrapper}
-        style={styles.snackBar}
-        onDismiss={() => setShowSnackbarDelete(false)}
-        duration={1000}
-      >
-        La ciudad se eliminó correctamente
+        { snackbarMsg }
       </Snackbar>
       <FAB
-        visible={cities.length === 0 ? false : true}
-        onPress={() => setIsOnMap(!isOnMap)}
+        visible={cities.length !== 0}
+        onPress={() => {
+          setIsOnMap(!isOnMap);
+          setCenterMapOnCity(false);
+        }}
         icon={{
           name: isOnMap ? 'apartment' : 'map',
           color: 'white',

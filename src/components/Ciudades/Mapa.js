@@ -5,8 +5,7 @@ import Loader from '../../components/Loader/Loader';
 import weatherAPI from '../../services/weatherAPI.service';
 
 export default function Mapa(props) {
-  const { cities } = props;
-  const kelvin = 273.15;
+  const { cities, modalCity, centerMapOnCity } = props;
   const [citiesWeather, setCitiesWeather] = useState([]);
   const [loading, setLoading] = useState(true);
   const [initialLocation, setInitialLocation] = useState({
@@ -36,63 +35,73 @@ export default function Mapa(props) {
     const deltaX = maxX - minX;
     const deltaY = maxY - minY;
 
-    setInitialLocation({
-      latitude: cities[0].coord.lat,
-      longitude: cities[0].coord.lon,
-      latitudeDelta: deltaX === 0 ? 0.0922 : deltaX * 3,
-      longitudeDelta: deltaY === 0 ? 0.0421 : deltaY * 3,
-    });
+    let centerlat = minX + ((maxX - minX) / 2); 
+    let centerlon = minY + ((maxY - minY) / 2); 
+
+    return (
+      {
+        latitude: centerlat,
+        longitude: centerlon,
+        latitudeDelta: deltaX === 0 ? 0.0922 : deltaX * 2,
+        longitudeDelta: deltaY === 0 ? 0.0421 : deltaY * 2,
+      }
+    );
   }
 
-  const init = async () => {
+  useEffect(async () => {
     setLoading(true);
+
+    if (centerMapOnCity) {
+      setInitialLocation({
+        latitude: modalCity.coord.lat,
+        longitude: modalCity.coord.lon,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      });
+    } else {
+      setInitialLocation(getRegionForCoordinates(cities));
+    }
+
     let citiesArray = [];
-    getRegionForCoordinates(cities);
     for (let i = 0; i < cities.length; i++) {
-      await weatherAPI(cities[i].coord.lat, cities[i].coord.lon).then(
-        (item) => {
-          if (citiesArray.length === 0) {
-            citiesArray = [item];
-          } else {
-            citiesArray = [...citiesArray, item];
-          }
+      await weatherAPI(cities[i].coord.lat, cities[i].coord.lon)
+      .then( item => {
+          citiesArray = citiesArray.length === 0 ? [item] : [...citiesArray, item];
         }
       );
     }
     setCitiesWeather(citiesArray);
 
     setLoading(false);
-  };
+  }, []);
 
-  const mapita = () => {
-    return (
+  const kelvin = 273.15;
+
+  return (
+    <>
+    { loading ? <Loader /> :
       <MapView style={styles.mapStyle} initialRegion={initialLocation}>
-        {citiesWeather.map((city, index) => {
-          return (
-            <Marker
-              coordinate={{
-                latitude: city.coord.lat,
-                longitude: city.coord.lon,
+        {citiesWeather.map((city, index) => (
+          <Marker
+            coordinate={{
+              latitude: city.coord.lat,
+              longitude: city.coord.lon,
+            }}
+            key={index}
+            title={parseInt(city.main.temp - kelvin) + ' °C'}
+          >
+            <Image
+              source={{
+                uri: `http://openweathermap.org/img/w/${city.weather[0].icon}.png`,
               }}
-              key={index}
-              title={parseInt(city.main.temp - kelvin) + ' °C'}
-            >
-              <Image
-                source={{
-                  uri: `http://openweathermap.org/img/w/${city.weather[0].icon}.png`,
-                }}
-                style={{ width: 66, height: 58 }}
-              />
-            </Marker>
-          );
-        })}
+              style={{ width: 66, height: 58 }}
+            />
+          </Marker>
+        ))}
       </MapView>
-    );
-  };
-
-  useEffect(init, []);
-
-  return !loading ? mapita() : <Loader />;
+    }
+    </>
+  );
 }
 
 const styles = StyleSheet.create({

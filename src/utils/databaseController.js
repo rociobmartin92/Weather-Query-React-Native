@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 
-const db = SQLite.openDatabase('db.asdassd');
+const db = SQLite.openDatabase('db.yourcitydata');
 
 /// INIT
 export const initTable = () => {

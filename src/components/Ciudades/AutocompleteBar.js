@@ -10,7 +10,7 @@ import * as database from '../../utils/databaseController';
 import colors from '../../../assets/colors';
 
 export default function AutocompleteBar(props) {
-  const { setShowSnackbarAdd, cities, setCities } = props;
+  const { setSnackbarMsg, cities, setCities } = props;
   const [listadoLocalidades, setListadoLocalidades] = useState(false);
   const [valueSelected, setValueSelected] = useState(null);
   const [loadingBtnAdd, setLoadingBtnAdd] = useState(false);
@@ -42,6 +42,7 @@ export default function AutocompleteBar(props) {
       return;
     }
 
+    setLoadingBtnAdd(true)
     let city = {
       provincia: valueSelected.provincia_nombre,
       name: valueSelected.nombre,
@@ -54,7 +55,8 @@ export default function AutocompleteBar(props) {
     database.add(JSON.stringify(city), setCities);
     database.read(setCities);
 
-    setShowSnackbarAdd(true);
+    setLoadingBtnAdd(false)
+    setSnackbarMsg('La ciudad se agregó correctamente');
   };
 
   return (

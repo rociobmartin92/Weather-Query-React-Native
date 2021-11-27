@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 
 import InfoCard from './InfoCard';
 import colors from '../../../assets/colors';
 import * as database from '../../utils/databaseController';
-import { Snackbar } from 'react-native-paper';
 
 export default function InfoCardList(props) {
   const {
@@ -12,14 +11,13 @@ export default function InfoCardList(props) {
     setCities,
     setModalVisible,
     setModalCity,
-    setShowSnackbarDelete,
+    setSnackbarMsg,
   } = props;
-  const [showSnackbar, setShowSnackbar] = useState(false);
 
   const eliminarCiudad = (id) => {
     database.del(id);
     database.read(setCities);
-    setShowSnackbarDelete(true);
+    setSnackbarMsg('La ciudad se eliminó correctamente');
   };
 
   return (

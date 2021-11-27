@@ -8,7 +8,7 @@ import colors from '../../../assets/colors';
 import WeatherInfo from './WeatherInfo';
 
 export default function ModalWeather(props) {
-  const { setModalVisible, modalVisible, modalCity, setIsOnMap } = props;
+  const { setModalVisible, modalVisible, modalCity, setIsOnMap, setCenterMapOnCity } = props;
 
   const [weather, setWeather] = useState(emptyWeaterObj);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +52,9 @@ export default function ModalWeather(props) {
         containerStyle={styles.iconContainer}
         color={colors.GENERAL}
         onPress={() => {
-          setIsOnMap(true), setModalVisible(false);
+          setIsOnMap(true);
+          setCenterMapOnCity(true);
+          setModalVisible(false);
         }}
       />
     </Overlay>
