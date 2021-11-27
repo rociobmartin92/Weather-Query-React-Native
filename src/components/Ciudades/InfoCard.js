@@ -1,21 +1,23 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Button, Icon } from 'react-native-elements';
-import { useNavigation } from "@react-navigation/native";
 
 import colors from "../../../assets/colors";
 
 export default function InfoCard(props){
-  const { city, eliminarCiudad } = props;
-  const navigation = useNavigation();
+  const { city, 
+          eliminarCiudad, 
+          setModalVisible,
+          setModalCity
+        } = props;
 
   return (
 
     <TouchableOpacity 
       style={styles.card}
       onPress={() => {
-        /// TODO: CAMBIAR EL NAVIGATE POR LA APERTURA DEL MODAL
-        navigation.navigate('miCiudad')
+        setModalCity(city);
+        setModalVisible(true);
       }}
     >
       <Icon 

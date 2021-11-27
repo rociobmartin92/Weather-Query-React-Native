@@ -8,7 +8,7 @@ export default function Mapa(props) {
   const { cities } = props;
   const kelvin = 273.15;
   const [citiesWeather, setCitiesWeather] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [initialLocation, setInitialLocation] = useState({
     latitude: 0,
     longitude: 0,
@@ -44,46 +44,55 @@ export default function Mapa(props) {
     });
   }
 
-  useEffect(() => {
+  const init = async () => {
     setLoading(true);
     let citiesArray = [];
     getRegionForCoordinates(cities);
     for (let i = 0; i < cities.length; i++) {
-      weatherAPI(cities[i].coord.lat, cities[i].coord.lon).then((item) => {
-        citiesArray.push(item);
-        console.log('item', item);
-      });
+      await weatherAPI(cities[i].coord.lat, cities[i].coord.lon).then(
+        (item) => {
+          if (citiesArray.length === 0) {
+            citiesArray = [item];
+          } else {
+            citiesArray = [...citiesArray, item];
+          }
+        }
+      );
     }
-    console.log('array', citiesArray);
+    setCitiesWeather(citiesArray);
 
     setLoading(false);
-    setCitiesWeather(citiesArray);
-  }, []);
+  };
 
-  return (
-    <MapView style={styles.mapStyle} initialRegion={initialLocation}>
-      {citiesWeather.map((city, index) => {
-        console.log(city.name);
-        return (
-          <Marker
-            coordinate={{
-              latitude: city.coord.lat,
-              longitude: city.coord.lon,
-            }}
-            key={index}
-            title={parseInt(city.main.temp - kelvin) + ' °C'}
-          >
-            <Image
-              source={{
-                uri: `http://openweathermap.org/img/w/${city.weather[0].icon}.png`,
+  const mapita = () => {
+    return (
+      <MapView style={styles.mapStyle} initialRegion={initialLocation}>
+        {citiesWeather.map((city, index) => {
+          return (
+            <Marker
+              coordinate={{
+                latitude: city.coord.lat,
+                longitude: city.coord.lon,
               }}
-              style={{ width: 66, height: 58 }}
-            />
-          </Marker>
-        );
-      })}
-    </MapView>
-  );
+              key={index}
+              title={parseInt(city.main.temp - kelvin) + ' °C'}
+            >
+              <Image
+                source={{
+                  uri: `http://openweathermap.org/img/w/${city.weather[0].icon}.png`,
+                }}
+                style={{ width: 66, height: 58 }}
+              />
+            </Marker>
+          );
+        })}
+      </MapView>
+    );
+  };
+
+  useEffect(init, []);
+
+  return !loading ? mapita() : <Loader />;
 }
 
 const styles = StyleSheet.create({

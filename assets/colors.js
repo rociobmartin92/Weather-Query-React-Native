@@ -1,6 +1,6 @@
 const colors = {
-  GENERAL: '#508fb2',
-  LIGHTGREY: '#f2f2f2',
+  GENERAL: '#6666ff',
+  LIGHTGREY: '#e6e6ff',
   RED: '#C90000',
   GREY: '#B3B3B3',
   LIGHTBLUE: '#bae3fb',
