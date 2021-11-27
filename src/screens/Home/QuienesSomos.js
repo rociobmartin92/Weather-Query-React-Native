@@ -24,9 +24,29 @@ export default function QuienesSomos() {
       <Text style={estilos.text}>
         Para crear la aplicación en un principio dibujamos en papel un bosquejo
         del diseño que queríamos, y definimos las funciones que la apliación
-        debía tener, luego realizamos ese diseño en Figma.
+        debía tener, luego realizamos ese diseño en Figma y creamos el Persona
+        Canvas:
       </Text>
-      <Text> ACA VA A IR EL LINK A FIGMA</Text>
+      <Text
+        style={estilos.canvas}
+        onPress={() => {
+          Linking.openURL(
+            "https://www.canva.com/design/DAEu2y2O1Ug/dwLB2zxo-iJ-c1osFPrP4Q/edit"
+          );
+        }}
+      >
+        PAPER PROTOTYPE
+      </Text>
+      <Text
+        style={estilos.canvas}
+        onPress={() => {
+          Linking.openURL(
+            "https://www.canva.com/design/DAEu2y2O1Ug/dwLB2zxo-iJ-c1osFPrP4Q/edit"
+          );
+        }}
+      >
+        PERSONA CANVAS: PAULA
+      </Text>
       <Text style={estilos.text}>
         Una vez terminado, creamos un repositorio y agregamos a los integrantes.
         De la rama principal, master, generamos dos branches, una para la
@@ -90,4 +110,13 @@ const estilos = StyleSheet.create({
   foto: { width: 55, height: 55 },
   tit: { fontSize: 20 },
   subtit: { fontSize: 17 },
+  canvas: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 15,
+    marginLeft: 30,
+    marginRight: 40,
+    fontFamily: "sans-serif-condensed",
+  },
 });
