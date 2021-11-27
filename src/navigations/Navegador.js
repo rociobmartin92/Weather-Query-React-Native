@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../screens/Home/Home.screen';
 import QuienesSomos from "../screens/Home/QuienesSomos";
 import Ciudades from "../screens/Ciudades/Ciudades.screen";
-import MiCiudad from "../screens/Ciudades/MiCiudad/MiCiudad.screen"
 import colors from "../../assets/colors"
 
 const Stack = createNativeStackNavigator();
@@ -43,11 +42,6 @@ export default function Navegador() {
           name="listaCiudades"
           component={Ciudades}
           options={{title: "Mis Ciudades"}}
-        />
-        <Stack.Screen 
-          name="miCiudad"
-          component={MiCiudad}
-          options={{title: "Mi Ciudad"}}
         />
       </Stack.Navigator>
     </NavigationContainer>

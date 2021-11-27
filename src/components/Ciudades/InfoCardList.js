@@ -6,7 +6,11 @@ import colors from '../../../assets/colors'
 import * as database from "../../utils/databaseController";
 
 export default function InfoCardList(props) {
-  const { cities, setCities } = props;
+  const { cities, 
+          setCities, 
+          setModalVisible,
+          setModalCity
+        } = props;
 
   const eliminarCiudad = (id) => {
     database.del(id);
@@ -26,7 +30,13 @@ export default function InfoCardList(props) {
           contentContainerStyle={styles.contentContainer}
         >
           {cities.map((city) => (
-            <InfoCard city={city} eliminarCiudad={eliminarCiudad} key={city.key}/>
+            <InfoCard 
+              key={city.key}
+              city={city} 
+              setModalVisible={setModalVisible}
+              setModalCity={setModalCity}
+              eliminarCiudad={eliminarCiudad} 
+              />
           ))}
         </ScrollView>
       }

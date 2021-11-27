@@ -7,12 +7,16 @@ import colors from '../../../assets/colors';
 import AutocompleteBar from '../../components/Ciudades/AutocompleteBar';
 import InfoCardList from '../../components/Ciudades/InfoCardList';
 import Mapa from '../../components/Ciudades/Mapa';
+import ModalWeather from '../../components/Ciudades/ModalWeather';
 import * as database from "../../utils/databaseController";
 
 export default function Ciudades() {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [isOnMap, setIsOnMap] = useState(false);
   const [cities, setCities] = useState([]);
+
+  const [modalCity, setModalCity] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     database.initTable();
@@ -23,8 +27,22 @@ export default function Ciudades() {
     <>
       { isOnMap ? <Mapa cities={cities} /> :
       <View style={{ paddingHorizontal: 10 }}>
-        <AutocompleteBar setShowSnackbar={setShowSnackbar} setCities={setCities} />
-        <InfoCardList cities={cities} setCities={setCities} />
+        <AutocompleteBar 
+          setShowSnackbar={setShowSnackbar} 
+          cities={cities}
+          setCities={setCities}
+        />
+        <InfoCardList 
+          cities={cities} 
+          setCities={setCities} 
+          setModalVisible={setModalVisible}
+          setModalCity={setModalCity}
+        />
+        <ModalWeather 
+          modalCity={modalCity} 
+          setModalVisible={setModalVisible} 
+          modalVisible={modalVisible}
+        />
       </View>}
       <Snackbar
         theme={{ colors: { surface: colors.LIGHTGREY } }}
@@ -53,7 +71,7 @@ export default function Ciudades() {
 const styles = StyleSheet.create({
   positionWrapper: {
     position: 'absolute',
-    bottom: 5,
+    bottom: 70,
   },
   snackBar: {
     backgroundColor: colors.GENERAL,
