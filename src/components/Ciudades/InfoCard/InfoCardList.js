@@ -2,18 +2,15 @@ import React from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 
 import InfoCard from './InfoCard';
-import colors from '../../../assets/colors';
-import * as database from '../../utils/databaseController';
+import colors from '../../../../assets/colors';
+import * as database from '../../../utils/databaseController';
 
+// Función que renderiza la lista completa de ciudades
 export default function InfoCardList(props) {
-  const {
-    cities,
-    setCities,
-    setModalVisible,
-    setModalCity,
-    setSnackbarMsg,
-  } = props;
+  const { cities, setCities, setModalVisible, setModalCity, setSnackbarMsg } =
+    props;
 
+  //Función que elimina la ciudad seleccionada
   const eliminarCiudad = (id) => {
     database.del(id);
     database.read(setCities);

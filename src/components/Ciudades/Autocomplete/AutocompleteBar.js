@@ -3,12 +3,13 @@ import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import Toast from 'react-native-root-toast';
 
-import localidadesAPI from '../../services/localidadesAPI.service';
-import Autocomplete from '../../components/Ciudades/Autocomplete/Autocomplete.component';
-import * as database from '../../utils/databaseController';
+import localidadesAPI from '../../../services/localidadesAPI.service';
+import Autocomplete from './Autocomplete.component';
+import * as database from '../../../utils/databaseController';
 
-import colors from '../../../assets/colors';
+import colors from '../../../../assets/colors';
 
+// Función que renderiza el conjuto de Autocomplete y botón para agregar ciudades
 export default function AutocompleteBar(props) {
   const { setSnackbarMsg, cities, setCities } = props;
   const [listadoLocalidades, setListadoLocalidades] = useState(false);
@@ -21,6 +22,7 @@ export default function AutocompleteBar(props) {
     });
   }, []);
 
+  // Función que permite agregar la ciudad elegida a la base de datos y evitar que se agregue una ciudad ya cargada
   const agregarCiudad = () => {
     if (!valueSelected) {
       Toast.show('Debe completar la ciudad a agregar', { position: -200 });
@@ -42,7 +44,7 @@ export default function AutocompleteBar(props) {
       return;
     }
 
-    setLoadingBtnAdd(true)
+    setLoadingBtnAdd(true);
     let city = {
       provincia: valueSelected.provincia_nombre,
       name: valueSelected.nombre,
@@ -55,7 +57,7 @@ export default function AutocompleteBar(props) {
     database.add(JSON.stringify(city), setCities);
     database.read(setCities);
 
-    setLoadingBtnAdd(false)
+    setLoadingBtnAdd(false);
     setSnackbarMsg('La ciudad se agregó correctamente');
   };
 

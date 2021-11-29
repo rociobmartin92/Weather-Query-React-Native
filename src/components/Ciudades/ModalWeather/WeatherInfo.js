@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 
+// Función que renderiza el modal con la información del clima de la ciudad elegida
 export default function WeatherInfo(props) {
   const { data } = props;
 

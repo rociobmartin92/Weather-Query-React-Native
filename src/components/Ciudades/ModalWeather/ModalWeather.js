@@ -3,12 +3,19 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Icon, Overlay } from 'react-native-elements';
 import { ActivityIndicator } from 'react-native-paper';
 
-import weatherAPI from '../../services/weatherAPI.service';
-import colors from '../../../assets/colors';
+import weatherAPI from '../../../services/weatherAPI.service';
+import colors from '../../../../assets/colors';
 import WeatherInfo from './WeatherInfo';
 
+// Función que renderiza la estructura del modal que muestra la información del clima de la ciudad elegida
 export default function ModalWeather(props) {
-  const { setModalVisible, modalVisible, modalCity, setIsOnMap, setCenterMapOnCity } = props;
+  const {
+    setModalVisible,
+    modalVisible,
+    modalCity,
+    setIsOnMap,
+    setCenterMapOnCity,
+  } = props;
 
   const [weather, setWeather] = useState(emptyWeaterObj);
   const [isLoading, setIsLoading] = useState(false);

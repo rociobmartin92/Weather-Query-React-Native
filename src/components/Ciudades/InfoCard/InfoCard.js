@@ -1,34 +1,27 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 
-import colors from "../../../assets/colors";
+import colors from '../../../../assets/colors';
 
-export default function InfoCard(props){
-  const { city, 
-          eliminarCiudad, 
-          setModalVisible,
-          setModalCity
-        } = props;
+// Función que renderiza la card con el nombre de la ciudad y la posibilidad de abrir el modal y eliminar la ciudad
+export default function InfoCard(props) {
+  const { city, eliminarCiudad, setModalVisible, setModalCity } = props;
 
   return (
-
-    <TouchableOpacity 
+    <TouchableOpacity
       style={styles.card}
       onPress={() => {
         setModalCity(city);
         setModalVisible(true);
       }}
     >
-      <Icon 
-        name="fullscreen"
-        style={styles.iconSty}
-      />
+      <Icon name="fullscreen" style={styles.iconSty} />
       <View style={styles.txtContainer}>
-        <Text numberOfLines={1} style={styles.provincia}> 
+        <Text numberOfLines={1} style={styles.provincia}>
           {city.provincia}
         </Text>
-        <Text numberOfLines={1} style={styles.name}> 
+        <Text numberOfLines={1} style={styles.name}>
           {city.name}
         </Text>
       </View>
@@ -42,7 +35,6 @@ export default function InfoCard(props){
         onPress={() => eliminarCiudad(city.key)}
       />
     </TouchableOpacity>
-
   );
 }
 
@@ -54,14 +46,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
-
+    alignItems: 'center',
   },
   iconSty: {
-    marginLeft: 15
+    marginLeft: 15,
   },
-  txtContainer:{
-    width: "70%",
+  txtContainer: {
+    width: '70%',
     margin: 12,
     marginLeft: 20,
   },
@@ -70,11 +61,11 @@ const styles = StyleSheet.create({
   },
   name: {
     marginTop: 3,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 15,
   },
   btn: {
     backgroundColor: 'transparent',
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 });

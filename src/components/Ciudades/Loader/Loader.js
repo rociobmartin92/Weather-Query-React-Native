@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
-import colors from '../../../assets/colors';
+import colors from '../../../../assets/colors';
 
+//Función que renderiza el loader
 export default function Loader(props) {
   return (
     <View style={styles.viewLoader}>

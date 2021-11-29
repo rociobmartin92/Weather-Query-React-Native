@@ -4,12 +4,13 @@ import { FAB } from 'react-native-elements';
 import { Snackbar } from 'react-native-paper';
 
 import colors from '../../../assets/colors';
-import AutocompleteBar from '../../components/Ciudades/AutocompleteBar';
-import InfoCardList from '../../components/Ciudades/InfoCardList';
-import Mapa from '../../components/Ciudades/Mapa';
-import ModalWeather from '../../components/Ciudades/ModalWeather';
+import AutocompleteBar from '../../components/Ciudades/Autocomplete/AutocompleteBar';
+import InfoCardList from '../../components/Ciudades/InfoCard/InfoCardList';
+import Mapa from '../../components/Ciudades/Mapa/Mapa';
+import ModalWeather from '../../components/Ciudades/ModalWeather/ModalWeather';
 import * as database from '../../utils/databaseController';
 
+// Función que renderiza la screen de ciudades
 export default function Ciudades() {
   const [snackbarMsg, setSnackbarMsg] = useState('');
 
@@ -28,7 +29,11 @@ export default function Ciudades() {
   return (
     <>
       {isOnMap ? (
-        <Mapa cities={cities} modalCity={modalCity} centerMapOnCity={centerMapOnCity} />
+        <Mapa
+          cities={cities}
+          modalCity={modalCity}
+          centerMapOnCity={centerMapOnCity}
+        />
       ) : (
         <View style={{ paddingHorizontal: 10 }}>
           <AutocompleteBar
@@ -60,7 +65,7 @@ export default function Ciudades() {
         onDismiss={() => setSnackbarMsg('')}
         duration={1000}
       >
-        { snackbarMsg }
+        {snackbarMsg}
       </Snackbar>
       <FAB
         visible={cities.length !== 0}

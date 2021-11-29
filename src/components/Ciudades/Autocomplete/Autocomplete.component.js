@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { IconButton, TextInput } from 'react-native-paper';
 import colors from '../../../../assets/colors';
-import styles from './Autocomplete.style';
 import { capitalizeFirstLetter } from '../../../utils/capitalize';
+
+// Función que renderiza input Autocomplete
 
 function Autocomplete(props) {
   const { data, label, valueSelected } = props;
@@ -38,6 +39,7 @@ function Autocomplete(props) {
     }
   };
 
+  // Función que filtra los resultados de la búsqueda
   const filter = () => {
     let localidadSelect = data.filter(
       (item) =>
@@ -65,7 +67,7 @@ function Autocomplete(props) {
   };
 
   useEffect(() => {
-    if (data !== false) {
+    if (data !== false && data !== undefined) {
       setValueFilter(filter());
     }
   }, [valueInput]);
@@ -127,5 +129,43 @@ function Autocomplete(props) {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  inputContainer: {
+    fontSize: 16,
+    backgroundColor: '#ffffff',
+    marginTop: -6,
+  },
+
+  textStyleOptions: {
+    fontSize: 16,
+    backgroundColor: '#ffffff',
+    textTransform: 'capitalize',
+  },
+  menuOptionStyle: {
+    paddingHorizontal: 15,
+    paddingVertical: 6,
+  },
+  cajaDesplegable: {
+    zIndex: 999,
+    backgroundColor: '#ffffff',
+    position: 'absolute',
+    top: 59,
+    width: '99%',
+    alignSelf: 'center',
+    maxHeight: 250,
+    borderRadius: 5,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 2,
+  },
+});
 
 export default Autocomplete;
