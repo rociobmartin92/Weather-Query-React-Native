@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AwesomeProject",
-    "slug": "AwesomeProject",
+    "name": "WeatherQueryApp",
+    "slug": "WeatherQueryApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
@@ -21,6 +21,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.finalproject.weatherqueryapp",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBtuV69o-w_79JPSBcsSQ_ap1o6rcUk_uc"
+        }
       },
       "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
     },

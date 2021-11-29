@@ -36,37 +36,27 @@ export default function QuienesSomos() {
         Canvas:
       </Text>
       <View style={styles.boxLinks}>
-        <Text
-          style={styles.canvas}
-          onPress={() => {
-            Linking.openURL(
-              'https://www.canva.com/design/DAEu2y2O1Ug/dwLB2zxo-iJ-c1osFPrP4Q/edit'
-            );
-          }}
-        >
-          PAPER PROTOTYPE
-        </Text>
+        <Text style={styles.canvas}>PAPER PROTOTYPE</Text>
         <Icon
           name="open-in-new"
           type="material-community"
           color={colors.GREY}
+          onPress={() => {
+            Linking.openURL('https://marvelapp.com/aagd811');
+          }}
         />
       </View>
       <View style={styles.boxLinks}>
-        <Text
-          style={styles.canvas}
+        <Text style={styles.canvas}>PERSONA CANVAS: PAULA</Text>
+        <Icon
+          name="open-in-new"
+          type="material-community"
+          color={colors.GREY}
           onPress={() => {
             Linking.openURL(
               'https://www.canva.com/design/DAEu2y2O1Ug/dwLB2zxo-iJ-c1osFPrP4Q/edit'
             );
           }}
-        >
-          PERSONA CANVAS: PAULA
-        </Text>
-        <Icon
-          name="open-in-new"
-          type="material-community"
-          color={colors.GREY}
         />
       </View>
 
@@ -109,7 +99,7 @@ const list = [
     linkedin: 'https://www.linkedin.com/in/cgastoncolaneri/',
   },
   {
-    foto: 'https://media-exp1.licdn.com/dms/image/D4E35AQFIv-QF0C-isg/profile-framedphoto-shrink_200_200/0/1637687800384?e=1638147600&v=beta&t=RV5wC4yHRnjilSv9bVjxgYjEljUEmWJUcacHs4UJNiA',
+    foto: 'https://media-exp1.licdn.com/dms/image/D4E35AQFIv-QF0C-isg/profile-framedphoto-shrink_200_200/0/1637687800384?e=1638237600&v=beta&t=XYT9r8MfKTE8o1Sc_RMWhYREVVL13vZ9YV3WegLvL9Y',
     nombre: 'Hugo Mauricio Morales Acevedo',
     email: 'hugoacevedo46.46@gmail.com',
     linkedin:
