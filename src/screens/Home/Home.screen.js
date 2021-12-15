@@ -10,12 +10,12 @@ import colors from '../../../assets/colors';
 export default function Home() {
   const navegacion = useNavigation();
   const [cerrar, setCerrar] = useState(true);
-  const [lluvia] = useState(new Animated.Value(1));
+  const [lluvia] = useState(new Animated.Value(50));
 
   useEffect(() => {
     Animated.timing(lluvia, {
       toValue: 0,
-      duration: 1000,
+      duration: 2500,
       useNativeDriver: false,
     }).start(() => setCerrar(false));
   }, []);

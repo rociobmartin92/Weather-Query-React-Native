@@ -64,6 +64,16 @@ export default function ModalWeather(props) {
           setModalVisible(false);
         }}
       />
+      <Text
+        onPress={() => {
+          setIsOnMap(true);
+          setCenterMapOnCity(true);
+          setModalVisible(false);
+        }}
+        style={styles.texticon}
+      >
+        VER MAPA
+      </Text>
     </Overlay>
   );
 }
@@ -118,5 +128,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 30,
     left: 30,
+  },
+  texticon: {
+    position: 'absolute',
+    bottom: 35,
+    left: 65,
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: colors.GENERAL,
   },
 });
