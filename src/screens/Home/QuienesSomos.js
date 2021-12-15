@@ -20,7 +20,7 @@ export default function QuienesSomos() {
             Linking.openURL(el.linkedin);
           }}
         >
-          <Avatar rounded source={{ uri: el.foto }} style={styles.foto} />
+          <Avatar rounded source={el.foto} style={styles.foto} />
           <ListItem.Content>
             <ListItem.Title style={styles.tit}>{el.nombre}</ListItem.Title>
             <ListItem.Subtitle style={styles.subtit}>
@@ -75,31 +75,31 @@ export default function QuienesSomos() {
 
 const list = [
   {
-    foto: '../../../assets/Rocio.PNG',
+    foto: require('../../../assets/Rocio.png'),
     nombre: 'Rocío Martín',
     email: 'martinrocio.1992@gmail.com',
     linkedin: 'https://www.linkedin.com/in/roc%C3%ADo-b-mart%C3%ADn-953978146/',
   },
   {
-    foto: '../../../assets/Joel.PNG',
+    foto: require('../../../assets/Joel.png'),
     nombre: 'Joel Sotelo Trobat',
     email: 'joel_sotelo_trobat@outlook.com',
     linkedin: 'https://www.linkedin.com/in/joel-sotelo-trobat/',
   },
   {
-    foto: '../../../assets/Santiago.PNG',
+    foto: require('../../../assets/Santiago.png'),
     nombre: 'Santiago Toledo',
     email: 'it.santiagotoledo@gmail.com',
     linkedin: 'https://www.linkedin.com/in/santiagotoledo/',
   },
   {
-    foto: '../../../assets/Gaston.PNG',
-    nombre: 'Christian Gastón Colaneri',
+    foto: require('../../../assets/Gaston.png'),
+    nombre: 'Gastón Colaneri',
     email: 'colaneri.gaston@hotmail.com',
     linkedin: 'https://www.linkedin.com/in/cgastoncolaneri/',
   },
   {
-    foto: '../../../assets/Hugo.PNG',
+    foto: require('../../../assets/Hugo.png'),
     nombre: 'Hugo Mauricio Morales Acevedo',
     email: 'hugoacevedo46.46@gmail.com',
     linkedin:

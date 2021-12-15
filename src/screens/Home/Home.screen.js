@@ -39,11 +39,11 @@ export default function Home() {
 
         <Text style={estilos.text}>
           Consultá rápidamente el clima de cualquier lugar de Argentina en
-          tiempo real y escogé la mejor ciudad para vender tus productos hoy
+          tiempo real y escogé la mejor ciudad para vender tus productos hoy.
         </Text>
 
         <Text style={estilos.text}>
-          Weather Query App te permite guardar las ciudades que más habitúas
+          Weather Query App te permite guardar las ciudades que más habitúas.
         </Text>
 
         <FAB

@@ -1,11 +1,11 @@
-import React from "react";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import React from 'react';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from '../screens/Home/Home.screen';
-import QuienesSomos from "../screens/Home/QuienesSomos";
-import Ciudades from "../screens/Ciudades/Ciudades.screen";
-import colors from "../../assets/colors"
+import QuienesSomos from '../screens/Home/QuienesSomos';
+import Ciudades from '../screens/Ciudades/Ciudades.screen';
+import colors from '../../assets/colors';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +14,7 @@ export default function Navegador() {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: "#FFF",
+      background: '#FFF',
     },
   };
   return (
@@ -28,20 +28,20 @@ export default function Navegador() {
           headerTitleStyle: { fontSize: 18 },
         }}
       >
-        <Stack.Screen 
-          name="home" 
+        <Stack.Screen
+          name="home"
           component={Home}
-          options={{title: "Home"}}
-          />
-        <Stack.Screen 
+          options={{ title: 'Weather Query App' }}
+        />
+        <Stack.Screen
           name="qs"
           component={QuienesSomos}
-          options={{title: "Sobre Nosotros"}}
+          options={{ title: 'Sobre Nosotros' }}
         />
-        <Stack.Screen 
+        <Stack.Screen
           name="listaCiudades"
           component={Ciudades}
-          options={{title: "Mis Ciudades"}}
+          options={{ title: 'Mis Ciudades' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
