@@ -1,8 +1,8 @@
 # Welcome to Weather Query App!
 
-- [APK](http://www.dropwizard.io/1.0.2/docs/)
+- [APK](https://drive.google.com/file/d/19Ojpn3_8_J4lvwXvSDjEyFMOpfjtYruf/view?usp=sharing)
 
-- [Persona Canvas](https://www.canva.com/design/DAEu2y2O1Ug/dwLB2zxo-iJ-c1osFPrP4Q/view)
+- [Persona Canvas](https://www.canva.com/design/DAEw87Qwcgs/FRFXdcrNtKG5G90oUpF4hg/view?utm_content=DAEw87Qwcgs&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 
 - [Paper Prototype](https://marvelapp.com/aagd811)
 
